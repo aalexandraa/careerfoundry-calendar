@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# cf-calendar: CareerFoundry Coding Challenge Solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The react app is deployed [here on GitHub pages](https://aalexandraa.github.io/cf-calendar).
 
-## Available Scripts
+## Install
 
-In the project directory, you can run:
+Install dependencies via yarn:
 
-### `yarn start`
+```sh
+yarn
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Running the dev server
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Run the app in development mode:
 
-### `yarn test`
+```sh
+yarn start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This should open a browser window showing the booking tool.
 
-### `yarn build`
+## Tools & libraries used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React as UI library
+- [Create React App](https://github.com/facebook/create-react-app) for dev server and build
+- swr for remote data fetching
+- date-fns for date parsing and manipulation. There is simply too much that will go wrong if you try doing it yourself.
+- Tailwind for rapid styling
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Reasoning for decisions made
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start with a date picker. Students probably want to pick a mentor call in the near future so we’re showing a very simple datepicker of the current month with today being highlighted.
 
-### `yarn eject`
+As per requirements, clicking on a day will open a view which shows all time slots on a day, including free slots and unavailable slots, whether they're booked or in the past.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I decided to not only show the time slots of a given day, but include the surrounding days in a somewhat typical calendar week-view fashion. The reason for this is is to give the student additional context and options for picking other dates that might be more suitable for them without having them to click through every single day manually. Also this seems ot naturally make sense since there is a lot of space available for showing aligned time slots which would otherwise simply be wasted. Note that this also works great on mobile.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Clicking on a time slot switches to the booking form view. The booking view shows the name of the mentor and the selected date and time for context, and allows the student to enter the reason for their appointment into a large input field with simple native validation.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Submiting the form will simulate a successful submission by saving the appointment in memory instead of a backend. If the submission went to a careerfoundry backend, I’d expect the response to include an updated list of allocated time slots, or a simple status message which would let me refresh the state by re-fetching the alocations.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I haven’t spent any time optimizing performance in terms of not recomputing everything all the time, putting everything into optimized data structures or splitting the app into smaller chunks.
 
-## Learn More
+## Accessibility
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Everything interactive is a button that can be focused via tab or screen reader tools.
