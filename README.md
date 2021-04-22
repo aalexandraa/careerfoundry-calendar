@@ -1,6 +1,6 @@
 # cf-calendar: CareerFoundry Coding Challenge Solution
 
-The react app is deployed [here on GitHub pages](https://aalexandraa.github.io/cf-calendar).
+The react app is deployed [here on GitHub pages](https://aalexandraa.github.io/careerfoundry-calendar).
 
 ## Install
 
